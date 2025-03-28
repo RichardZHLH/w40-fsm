@@ -9,11 +9,11 @@ console.log("one:", base)
 
 let rate = 1
 async function test() {
-  let first = 18142
-  let end = 20174
+  let first = 18142+1
+  let end = 20172
   let total = 0
-  for(let i=first; i<end; i++) {
-    let ei = base * 0.88 **(parseInt((i-first)/365))
+  for(let i=first; i<=end; i++) {
+    let ei = base * 0.88 **(parseInt((1+i-first)/365))
     total += ei
     console.log("ei:", ei)
   }

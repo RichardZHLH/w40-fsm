@@ -39,8 +39,8 @@ function insertMethod(web3, name, call, params, inputFormatter, outputFormatter)
 }
 
 // const url = "https://gwan-ssl.wandevs.org:56891"
-// const url = "http://127.0.0.1:26891"
-const url = "http://123.123.110.44:26891"
+const url = "http://127.0.0.1:26891"
+// const url = "http://123.123.110.44:26891"
 
 function getClient(type, uri) {
   let client;
@@ -110,22 +110,24 @@ async function test() {
 
 
   const startBlock = 21454700
-  const endBlock = 21954700   //37694849
+  const endBlock = 37694849
   const count = 1000
   let saveTotal = BigNumber(0)
 
   let f = startBlock
   let t = f+count
-  let bps = []
-  let bs = []
+
   while(true) {
-    if(f = endBlock) break
+    if(f == endBlock) break
+    console.log('from:', f)
+    let bps = []
+    let bs = []
     for(let i=f; i<t; i++) {
       let bp = client.eth.getBlock(i)
-      bps.append(bp)
+      bps.push(bp)
     }
     bs = await Promise.all(bps)
-    for(let i=f; i<t; i++) {
+    for(let i=0; i<bs.length; i++) {
       saveTotal = saveTotal.plus(BigNumber(bs[i].baseFeePerGas).times(bs[i].gasUsed))
     }
 
